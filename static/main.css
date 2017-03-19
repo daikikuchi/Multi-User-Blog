@@ -1,0 +1,342 @@
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+    width: 100%;
+    margin: 0 auto;
+    color: #333;
+    width: 100%;
+}
+
+hr {
+    color: #80d9f1;
+    font-size: 20px;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.26);
+}
+
+h2 {
+    padding-top: 15px;
+    margin: 0px;
+    font-align;
+    center;
+    font-size: 35px;
+}
+
+h5 {
+    text-align: center;
+    cursor: pointer;
+}
+
+table {
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+}
+
+textarea {
+    width: 700px;
+    height: 500px;
+    font-size: 22px;
+    font-family: monospace;
+    margin: 0 auto;
+}
+
+.main-title {
+    display: block;
+    color: #222;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    padding: 20px, 0px, 0px, 10px cursor: pointer;
+}
+
+.main-title:hover {
+    opacity: 0.8;
+    color: #80d9f1;
+}
+
+.sub-title {
+    text-align: center;
+}
+
+.header {
+    min-height: 56px;
+}
+
+.nav__list {
+    text-align: center;
+    position: relative;
+    right: 25px;
+}
+
+.nav a {
+    text-decoration: none;
+    padding: 1.5em;
+    text-align: center;
+    font-size: 20px;
+    height: 60px;
+    cursor: pointer;
+    color: black;
+}
+
+.nav a:hover {
+    opacity: 0.8;
+    color: #80d9f1;
+}
+
+.nav__item {
+    display: inline-block;
+    width: 150px;
+    font-size: 13px;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 8px;
+    margin: top: 3px;
+}
+
+
+
+.nav__item + .nav__item {
+    margin-left: 18px;
+}
+
+.sign-up {
+    width: 40%;
+    background-color: #F7F7F7;
+    text-align: center;
+    border: 3px solid #80d9f1;
+    margin: 0 auto;
+}
+
+.signup-login-submit {
+    font-size: 18px;
+    margin: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 5px;
+    background-color:white;
+    width:80px;
+
+}
+
+.signup-login-submit:hover {
+    opacity: 0.8;
+    background-color: #80d9f1;
+}
+
+.label {
+    text-align: right;
+    margin: 0 auto;
+}
+
+.error {
+    color: red;
+    font-size: 18px;
+}
+
+.error_like {
+    text-align: center;
+    color: red;
+    font-size: 18px;
+}
+
+.error_edit_delete {
+    text-align: center;
+    color: red;
+    font-size: 18px;
+}
+
+.link-login-div {
+    width: 150px;
+    height: 30px;
+    margin: 40px auto;
+    cursor: pointer;
+    border: 1px solid #80d9f1;
+    border-radius: 25px;
+    text-aligh;
+    center background-color: #F7F7F7;
+}
+
+.link-login {
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+    left: 40px;
+    bottom: 2px;
+}
+
+.post {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.new-edit-post {
+    color: #222;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px, 0px, 0px, 10px
+}
+
+.post + .post {
+    margin-top: 30px;
+}
+
+.post-heading {
+    position: relative;
+    border-bottom: 3px solid #666;
+}
+
+.post-title {
+    font-size: 28px;
+    font-weight: bold;
+    padding-bottom: 3px;
+}
+
+.post-icon-bundle {
+    position: absolute;
+    right: 0px;
+    bottom: 7px;
+    color: #999;
+    padding-bottom: 3px;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+#svg1 {
+    cursor: pointer;
+}
+
+.icon + .icon {
+    nargin-left;
+    4px;
+}
+
+.post-content {
+    font-family: sans-serif, Helvetica, Arial;
+    margin-top: 15px;
+    font-size: 18px;
+    line-height: 32px;
+}
+
+#comment {
+    width: 100%;
+    height: 100px;
+    font-size: 18px;
+    padding: 2px;
+    margin: 10px, 10px, 10px, 0;
+    font-family: monospace;
+}
+
+.comments {
+    font-size: 18px;
+    padding: 3px, 3px, 3px, 0;
+    margin-bottom: 5px;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.commented-by {
+    color: #365899;
+}
+
+#input-post {
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 8px;
+    width: 100px;
+}
+
+.border {
+    border-bottom: 1px solid #f3f3f3;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.button-comment-parent {
+    &:hover .button-bundle {
+        display: block;
+    }
+}
+
+.button-bundle {
+    display: ;
+}
+
+.button {
+    font-size: 13px;
+    border: none;
+    background-color: white;
+    color: blue;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: 0;
+}
+
+.button + .button {
+    margin-left: 10px;
+}
+
+.button_edit_delete {
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.post-button {
+    width: 100px;
+    font-size: 13px;
+    margin: 20px;
+    text-align: center;
+    border: 1px solid #666;
+    border-radius: 25px;
+    box-shadow: 0px 2px 5px #888888;
+    background-color: #00b3e4;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.go_back {
+    font-size: 24px;
+    border-radius: 25px;
+}
+
+.post-container {
+    text-align: center;
+}
+
+#newcomment {
+    margin-top: 10px;
+}
+
+.input-title {
+    width: 700px;
+    height: 50px;
+    font-size: 28px;
+    line-height: 2px;
+    border: none;
+    font-style: bold;
+    margin-bottom: 20px;
+}

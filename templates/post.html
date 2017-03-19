@@ -1,0 +1,43 @@
+<div class="post">
+    <div class="post-heading">
+        <div class="post-title">
+            {{p.subject}}
+        </div>
+        <div class="post-icon-bundle">
+            <a href="/blog/{{p.key.id()}}/edit" style="margin:3px;">Edit</a>
+            <button class="button" name="Delete" value="Delete" onclick="return getConfirmation();">Delete
+            </button>
+            <script type="text/javascript">
+            function getConfirmation() {
+                var retVal = confirm("Do you really want to delete?");
+                if (retVal == true) {
+                    window.location.href = "/blog/{{p.key.id()}}/delete";
+                } else {
+                    alert("You are not allow to delete this post")
+                    return false;
+                }
+
+            }
+            </script>
+            {{p.created.strftime("%b %d, %Y")}}
+        </div>
+    </div>
+    <div class="post-content">
+        {{p._render_text | safe}}
+    </div>
+    <div class="border"></div>
+    <div class="button-comment-parent">
+        <div class="button-bundle">
+            <object id="svg1" class="icon" data="/static/like.svg" type="image/svg+xml" height="18"></object>
+            <a href="/blog/{{p.key.id()}}/like" style="margin:3px;">Like
+                {{p.like}}
+            </a>
+            <object id="svg2" class="icon" data="/static/unlike.svg" type="image/svg+xml" height="18"></object>
+            <a href="/blog/{{p.key.id()}}/unlike" style="margin:3px;">Unlike
+            </a>
+            <object id="svg3" class="icon" data="/static/comment.svg" type="image/svg+xml" height="18"></object>
+            <a href='/blog/{{p.key.id()}}/comment'>Comment&nbsp;{{noComments}}
+            </a>
+        </div>
+    </div>
+</div>

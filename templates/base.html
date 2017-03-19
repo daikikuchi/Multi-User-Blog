@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="Developer" content="Dai Kikuchi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/static/main.css">
+    <title>Who are you?</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+</head>
+
+<body>
+    <div>
+        <header class="header">
+            <h2 class="main-title"><a href="/" class="main-title">Who are you?</a>
+        </h2>
+            <p class="sub-title"> ~ Share your story ~ </p>
+            <nav id="drawer" class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="/">Home</a></li>
+                    {% if user %}
+                    <li class="nav__item"><a href="/blog/newpost">New post</a></li>
+                    <li class="nav__item"><a href="/logout">Log out</a></li>
+                    {% else %}
+                    <li class="nav__item"><a href="/login">Log in</a></li>
+                    <li class="nav__item"><a href="/register">Sign up</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <hr>
+    <!--to display all the posts-->
+    {% if posts %}
+    <div>
+        {% for p in posts %} {{ p.render() | safe }}
+        <br>
+        <br> {% endfor %}
+    </div>
+    {% endif %}
+    <!--insert block content below for pages that extends this base.html-->
+    {% block content %} {% endblock %}
+</body>
+
+</html>

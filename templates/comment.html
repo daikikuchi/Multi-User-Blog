@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block content %} {{p.render() | safe}}
+<br>
+<br> {% for comment in comments %}
+<!-- div for each comment -->
+<div class="comments">
+    <b class="commented-by">{{comment.commented_by}}:</b> {{comment.comment | safe}}
+</div>
+{% endfor %}
+<div class="comments" id="newcomment">
+    <form action="/blog/{{p.key.id()}}/comment" method="post">
+        <textarea name='comment' id='comment' placeholder="Write a response...">{{comment}}</textarea>
+        <br/>
+        <input id="input-post" type='submit' value='Post'>
+    </form>
+</div>
+{% endblock %}

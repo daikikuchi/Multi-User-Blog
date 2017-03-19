@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+<div class="error_edit_delete">
+    {{error_edit}}
+</div>
+<div class="error_edit_delete">
+    {{error_delete}}
+</div>
+<div class="error_like">
+    {{error_like}}
+</div>
+<div class="error_like">
+    {{error_comment}}
+</div>
+<br>
+<a href="/blog" class="button_edit_delete">
+    <button class="go_back">Go back</button>
+</a>
+{% endblock %}

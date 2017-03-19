@@ -1,0 +1,19 @@
+{% extends "base.html" %} 
+{% block content %}
+<h2 class="new-edit-post">Edit post</h2>
+<br>
+<div class="post-container">
+    <form method="post">
+        <label>
+            <input placeholder="Title" class="input-title" type="text" name="subject" value="{{p.subject}}">
+        </label>
+        <label>
+            <div>
+            <textarea name="content" , placeholder="What is in your mind?...">{{p.content}}</textarea>
+            </div>
+        </label>
+        <div class="error">{{error}}</div>
+        <input type="submit" class="post-button">
+    </form>
+</div>
+{% endblock %}
