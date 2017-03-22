@@ -16,7 +16,7 @@ class MainPage(MainHandler):
         self.render('base.html', posts=posts, user=self.user)
 
 
-app = webapp2.WSGIApplication\
+app = webapp2.WSGIApplication \
     ([('/', MainPage),
       ('/register', UserRegister),
       ('/login', Login),

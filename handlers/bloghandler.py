@@ -13,17 +13,18 @@ class NewPost(MainHandler):
     def post(self):
         subject = self.request.get('subject')
         content = self.request.get('content')
+        """ make sure user is signed in before handling post request """
+        if self.user:
+            if subject and content:
+                post = BlogPost(subject=subject,
+                                content=content, user_id=self.user.key.id())
 
-        if subject and content:
-            post = BlogPost(subject=subject,
-                            content=content, user_id=self.user.key.id())
-
-            post.put()
-            self.redirect('/blog/%s' % str(post.key.id()))
-        else:
-            error = "Please enter subject and content!"
-            self.render("new-post.html", subject=subject, content=content,
-                        error=error, user=self.user)
+                post.put()
+                self.redirect('/blog/%s' % str(post.key.id()))
+            else:
+                error = "Please enter subject and content!"
+                self.render("new-post.html", subject=subject, content=content,
+                            error=error, user=self.user)
 
 
 class EditPost(MainHandler):
@@ -53,16 +54,20 @@ class EditPost(MainHandler):
         edit_subject = self.request.get('subject')
         edit_content = self.request.get('content')
 
-        if edit_subject and edit_content:
-            post.subject = edit_subject
-            post.content = edit_content
-            post.put()
-            self.redirect('/blog/%s' % str(post.key.id()))
+        if not post:
+            msg = 'The post does not exist'
+            self.render('error.html', error=msg, user=self.user)
         else:
-            error = "Please enter subject and content!"
-            self.render("edit-post.html", subject=edit_subject,
-                        content=edit_content,
-                        error=error, user=self.user, p=post)
+            if edit_subject and edit_content:
+                post.subject = edit_subject
+                post.content = edit_content
+                post.put()
+                self.redirect('/blog/%s' % str(post.key.id()))
+            else:
+                error = "Please enter subject and content!"
+                self.render("edit-post.html", subject=edit_subject,
+                            content=edit_content,
+                            error=error, user=self.user, p=post)
 
 
 class DeletePost(MainHandler):
@@ -223,17 +228,21 @@ class DeleteComment(MainHandler):
             self.render('error.html', error=msg, user=self.user)
         else:
             comment = Comment.get_by_id(int(comment_id), post.key)
-            if self.user.key.id() == comment.commented_by_ukey.id():
-                comment.key.delete()
-                # sleep 1s to make database updated
-                time.sleep(1)
-                """ get all comments from db again to display """
-                comments = Comment.query(ancestor=post.key).order(
-                    -Comment.created).fetch()
-                self.render("comment.html", p=post, comments=comments,
-                            user=self.user)
+            if comment:
+                if self.user.key.id() == comment.commented_by_ukey.id():
+                    comment.key.delete()
+                    # sleep 1s to make database updated
+                    time.sleep(1)
+                    """ get all comments from db again to display """
+                    comments = Comment.query(ancestor=post.key).order(
+                        -Comment.created).fetch()
+                    self.render("comment.html", p=post, comments=comments,
+                                user=self.user)
+                else:
+                    msg = 'You are not allowed to delete this comment'
+                    self.render('error.html', error=msg, user=self.user)
             else:
-                msg = 'You are not allowed to delete this comment'
+                msg = 'Comment does not exist'
                 self.render('error.html', error=msg, user=self.user)
 
 
@@ -242,19 +251,22 @@ class EditComment(MainHandler):
         post = BlogPost.get_by_id(int(post_id))
         comment = Comment.get_by_id(int(comment_id), post.key)
         c = self.request.get('edit-comment-txt')
-        print("comment from post " + c)
-        if c:
-            comment.comment = c
-            comment.put()
-            # sleep 1s to make database updated
-            time.sleep(1)
-            """ get all comments from db again to display """
-            comments = Comment.query(ancestor=post.key).order(
-                -Comment.created).fetch()
-            self.render("comment.html", p=post, comments=comments,
-                        user=self.user)
+        if comment:
+            if c:
+                comment.comment = c
+                comment.put()
+                # sleep 1s to make database updated
+                time.sleep(1)
+                """ get all comments from db again to display """
+                comments = Comment.query(ancestor=post.key).order(
+                    -Comment.created).fetch()
+                self.render("comment.html", p=post, comments=comments,
+                            user=self.user)
+            else:
+                error = "Please enter comment!"
+                self.render("error.html",
+                            error_comment=error, user=self.user,
+                            comment_id=comment_id, post_id=post_id)
         else:
-            error = "Please enter comment!"
-            self.render("error.html",
-                        error_comment=error, user=self.user,
-                        comment_id=comment_id, post_id=post_id)
+            msg = 'Comment does not exist'
+            self.render('error.html', error=msg, user=self.user)
