@@ -1,7 +1,7 @@
 import os
 import jinja2
-from user import User
 from google.appengine.ext import ndb
+from user import User
 
 template_dir = os.path.join(os.path.dirname(__file__), '..', 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
@@ -31,12 +31,12 @@ class BlogPost(ndb.Model):
             -Comment.created).fetch()
         return cls.comments
 
-    def render(self):
+    def render(self, user):
         self._render_text = self.content.replace('\n', '<br>')
         """ count the number of comments to display on html page """
         n = Comment.query(ancestor=self.key).count()
         print("no of comments " + str(n))
-        return render_str("post.html", p=self, noComments=n)
+        return render_str("post.html", p=self, noComments=n, user=user)
 
 
 # Comment entity in ndb to store comment related information, Comment's parent
@@ -45,3 +45,4 @@ class Comment(ndb.Model):
     comment = ndb.TextProperty()
     commented_by = ndb.StringProperty()
     created = ndb.DateTimeProperty(auto_now_add=True)
+    commented_by_ukey = ndb.KeyProperty(kind=User)

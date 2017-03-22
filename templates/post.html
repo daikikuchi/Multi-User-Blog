@@ -4,9 +4,13 @@
             {{p.subject}}
         </div>
         <div class="post-icon-bundle">
-            <a href="/blog/{{p.key.id()}}/edit" style="margin:3px;">Edit</a>
-            <button class="button" name="Delete" value="Delete" onclick="return getConfirmation();">Delete
-            </button>
+            {% if user: %}
+              {% if user.key.id() == p.user_id %}
+                <a href="/blog/{{p.key.id()}}/edit" style="margin:3px;">Edit</a>
+                <button class="button" name="Delete" value="Delete" onclick="return getConfirmation();">Delete
+                </button>
+              {% endif %}
+            {% endif %}
             <script type="text/javascript">
             function getConfirmation() {
                 var retVal = confirm("Do you really want to delete?");

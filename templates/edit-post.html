@@ -1,19 +1,28 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% block content %}
 <h2 class="new-edit-post">Edit post</h2>
 <br>
 <div class="post-container">
-    <form method="post">
+    <form method="post" id="nameform">
         <label>
-            <input placeholder="Title" class="input-title" type="text" name="subject" value="{{p.subject}}">
+            <input placeholder="Title" class="input-title" type="text"
+                   name="subject" value="{{p.subject}}">
         </label>
         <label>
             <div>
-            <textarea name="content" , placeholder="What is in your mind?...">{{p.content}}</textarea>
+                <textarea name="content" ,
+                          placeholder="What is in your mind?...">{{p.content}}</textarea>
             </div>
         </label>
         <div class="error">{{error}}</div>
-        <input type="submit" class="post-button">
+        <div class="edit-button-budle">
+            <button type="submit" class="post-button" form="nameform">Submit
+            </button>
+            <form action='/blog/{{p.key.id()}}'>
+                <input class="cancel-button" type="submit" value="Cancel"/>
+            </form>
+        </div>
     </form>
 </div>
+
 {% endblock %}

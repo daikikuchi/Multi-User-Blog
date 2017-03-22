@@ -3,26 +3,30 @@ import jinja2
 import os
 import hmac
 from models.user import User
+from handlers.secret import SECRET
 
 template_dir = os.path.join(os.path.dirname(__file__), '..', 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
-
-secret = 'udacity'
 
 
 def render_str(template, **params):
     t = jinja_env.get_template(template)
     return t.render(params)
 
+
 """ make secure cookie value from the value of user id from the db
 first part of cookie value is user id """
+
+
 def make_secure_val(val):
-    return '%s|%s' % (val, hmac.new(secret, val).hexdigest())
+    return '%s|%s' % (val, hmac.new(SECRET, val).hexdigest())
 
 
-""" compare the hashed value of the first part of cookie value (which is user id)
-with cookie value """
+""" compare the hashed value of the first part of cookie value
+(which is user id) with cookie value """
+
+
 def check_secure_val(secure_val):
     val = secure_val.split('|')[0]
     if secure_val == make_secure_val(val):

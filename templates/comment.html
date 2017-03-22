@@ -1,16 +1,35 @@
-{% extends "base.html" %} {% block content %} {{p.render() | safe}}
+{% extends "base.html" %} {% block content %} {{p.render(user) | safe}}
 <br>
-<br> {% for comment in comments %}
-<!-- div for each comment -->
-<div class="comments">
-    <b class="commented-by">{{comment.commented_by}}:</b> {{comment.comment | safe}}
-</div>
-{% endfor %}
-<div class="comments" id="newcomment">
-    <form action="/blog/{{p.key.id()}}/comment" method="post">
-        <textarea name='comment' id='comment' placeholder="Write a response...">{{comment}}</textarea>
-        <br/>
-        <input id="input-post" type='submit' value='Post'>
-    </form>
+<div class="comment-list">
+    {% for comment in comments %}
+    <!-- div for each comment -->
+    <div class="single-comment">
+        <p class="p-comment"><b>{{comment.commented_by}}:</b> {{comment.comment | safe}}</p>
+            <!-- show edit and delete links only if user is logged in and only
+            for own comments -->
+            {% if user: %} {% if comment.commented_by_ukey == user.key %}
+            <div class="a-bundle">
+                <a href="#" class="comment-link-edit">Edit</a> |
+                <a class="comment-link-delete" href="/blog/{{p.key.id()}}/{{comment.key.id()}}/delete">
+                Delete</a>
+            </div>
+            {% endif %} {% endif %}
+    </div>
+    <div class="comment-edit-form">
+        <form action="/blog/{{p.key.id()}}/{{comment.key.id()}}/edit" method="post" class="edit-form">
+            <textarea name='edit-comment-txt' id="edit-comment-txt">{{comment.comment | safe}}</textarea>
+            <input id="edit-post" type='submit' value='Save'> |
+            <!--<a href="#" class="cancel-comment">Cancel</a>-->
+            <input id="cancel-post" class="cancel-comment" type='submit' value='Cancel'>
+        </form>
+    </div>
+    {% endfor %}
+    <div id="newcomment">
+        <form action="/blog/{{p.key.id()}}/comment" method="post">
+            <textarea name='comment' id='comment' placeholder="Write a response...">{{comment}}</textarea>
+            <br/>
+            <input id="input-post" type='submit' value='Post'>
+        </form>
+    </div>
 </div>
 {% endblock %}

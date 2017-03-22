@@ -1,6 +1,5 @@
 from mainhandler import MainHandler
 from models.blog import BlogPost
-from google.appengine.ext import ndb
 
 
 class PostPage(MainHandler):

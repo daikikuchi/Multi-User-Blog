@@ -1,0 +1,48 @@
+<!--&lt;!&ndash; div for each comment &ndash;&gt;-->
+<!--<div class="comments">-->
+    <!--<b class="commented-by">{{comment.commented_by}}:</b> {{comment.comment | safe}}-->
+    <!--<div>-->
+        <!--<input type="hidden" value="{{comment.key.id()}}">-->
+    <!--<button id="comment-link-edit" onclick="toggle()">Edit</button>-->
+        <!--<div  id="edit-comment-div" style="visibility: hidden">-->
+        <!--<a id = "comment-edit" href="/blog/{{p.key.id()}}/{{comment.key.id()}}/edit">-->
+
+    <!--<textarea name='edit-comment-txt' >{{comment.comment | safe}}</textarea>-->
+            <!--Edit</a>-->
+    <!--</div>-->
+        <!--<script type="text/javascript">-->
+    <!--var editLink = document.getElementById('comment-link-edit');-->
+    <!--var divComment = document.getElementById('edit-comment-div');-->
+
+<!--function toggle() {-->
+    <!--divComment.style.visibility = divComment.style.visibility === "hidden" ? "visible" :  "hidden";-->
+    <!--if(divComment.style.visibility === "hidden") {-->
+        <!--editLink.style.visibility="visible";-->
+        <!--} else {-->
+        <!--editLink.style.visibility="hidden";-->
+        <!--}-->
+<!--}-->
+
+<!--</script>-->
+
+        <!--<a class = "comment-link-delete" href="/blog/{{p.key.id()}}/{{comment.key.id()}}/delete" style="margin:3px;">Delete</a>-->
+
+    <!--</div>-->
+<!--</div>-->
+<!-- show all comments for this post -->
+      <div class="comment-list row">
+        {% for comment in comments %}
+          <!-- hidden comment edit form gets displayed when user clicks edit -->
+          <div class="comment-edit-form col-xs-12">
+            <form method="post" class="edit-form">
+              <textarea name="edit-comment" class="comment-input col-xs-12">{{comment.comment}}</textarea>
+              <a href="#" data-commentid="{{comment.key.id()}};{{p.key.id()}}" class="save-button">Save</a> |
+              <a href="#" class="cancel-button">Cancel</a>
+            </form>
+            <p class="error"><p>
+          </div></title>
+</head>
+<body>
+
+</body>
+</html>
