@@ -57,11 +57,12 @@ class EditPost(MainHandler):
             post = BlogPost.get_by_id(int(post_id))
             edit_subject = self.request.get('subject')
             edit_content = self.request.get('content')
-            if self.user.key.id() == post.user_id:
-                if not post:
-                    msg = 'The post does not exist'
-                    self.render('error.html', error=msg, user=self.user)
-                else:
+            if not post:
+                msg = 'The post does not exist'
+                self.render('error.html', error=msg, user=self.user)
+            else:
+                """ make sure user owns the post """
+                if self.user.key.id() == post.user_id:
                     if edit_subject and edit_content:
                         post.subject = edit_subject
                         post.content = edit_content
@@ -72,9 +73,9 @@ class EditPost(MainHandler):
                         self.render("edit-post.html", subject=edit_subject,
                                     content=edit_content,
                                     error=error, user=self.user, p=post)
-            else:
-                msg = 'You are not allowed to edit this post'
-                self.render('error.html', error=msg, user=self.user)
+                else:
+                    msg = 'You are not allowed to edit this post'
+                    self.render('error.html', error=msg, user=self.user)
 
 
 class DeletePost(MainHandler):
@@ -242,23 +243,19 @@ class DeleteComment(MainHandler):
             else:
                 comment = Comment.get_by_id(int(comment_id), post.key)
                 if comment:
-                    """ checking whether user is login, if not, redirect to login page """
-                    if not self.user:
-                        self.redirect("/login")
+                    """ make sure user owns the comment """
+                    if self.user.key.id() == comment.commented_by_ukey.id():
+                        comment.key.delete()
+                        # sleep 1s to make database updated
+                        time.sleep(1)
+                        """ get all comments from db again to display """
+                        comments = Comment.query(ancestor=post.key).order(
+                            -Comment.created).fetch()
+                        self.render("comment.html", p=post, comments=comments,
+                                    user=self.user)
                     else:
-                        """ make sure user owns the comment """
-                        if self.user.key.id() == comment.commented_by_ukey.id():
-                            comment.key.delete()
-                            # sleep 1s to make database updated
-                            time.sleep(1)
-                            """ get all comments from db again to display """
-                            comments = Comment.query(ancestor=post.key).order(
-                                -Comment.created).fetch()
-                            self.render("comment.html", p=post, comments=comments,
-                                        user=self.user)
-                        else:
-                            msg = 'You are not allowed to delete this comment'
-                            self.render('error.html', error=msg, user=self.user)
+                        msg = 'You are not allowed to delete this comment'
+                        self.render('error.html', error=msg, user=self.user)
                 else:
                     msg = 'Comment does not exist'
                     self.render('error.html', error=msg, user=self.user)
