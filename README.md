@@ -22,7 +22,7 @@ To run it locally:
 
 ## Project description
 
-This is a blog project. User is directed to login, logout, and signup pages as appropriate. E.g., login page should have a link to signup page and vice-versa; logout page is only available to logged in user.Links to edit blog pages are available to users. Users editing a page can click on a link to cancel the edit and go back to viewing that page. Blog pages render properly. Templates are used to unify the site.
+This is a blog project. User is directed to login, logout, and signup pages as appropriate. E.g., login page has a link to signup page and vice-versa; logout page is only available to logged in user. Links to edit blog pages are available to users. Users editing a page can click on a link to cancel the edit and go back to viewing that page. Blog pages render properly. Templates are used to unify the site.
 
 Users are able to create accounts, login, and logout correctly.Existing users can revisit the site and log back in without having to recreate their accounts each time. Usernames are unique. Attempting to create a duplicate user results in an error message.Stored passwords are hashed. Passwords are appropriately checked during login. User cookie is set securely.
 
