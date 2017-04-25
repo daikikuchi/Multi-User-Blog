@@ -1,8 +1,6 @@
 # Multi User Blog
 https://multiuserblogudacity.appspot.com/
 
-This is a Udacity full stack nanodegree (FSND) multi user blog project.
-
 The main technologies used in this project are Google App Engine, Jinja and Python.
 
 You can view it live here: https://multiuserblogudacity.appspot.com/
