@@ -1,9 +1,8 @@
 # Multi User Blog
-https://multiuserblogudacity.appspot.com/
 
 The main technologies used in this project are Google App Engine, Jinja and Python.
 
-## You can view it live here: https://multiuserblogudacity.appspot.com/
+## You can view it live here: 
 
 Requirements for local deployment
 - Google App Engine SDK
